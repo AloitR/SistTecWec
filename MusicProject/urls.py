@@ -1,12 +1,14 @@
 from django.conf.urls.defaults import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+#from django.contrib import admin
+#admin.autodiscover()
+
+from MusicProject.views import *
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'MusicProject.views.home', name='home'),
+     url(r'^$', mainpage, name='home'),
     # url(r'^MusicProject/', include('MusicProject.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
