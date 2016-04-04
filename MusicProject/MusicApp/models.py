@@ -10,12 +10,17 @@ class Artist(models.Model):
     similars = models.TextField()
     summary = models.TextField()
 
+    def __unicode__(self):
+        return self.nomArtista
+
 class Album(models.Model):
     nomAlbum = models.TextField()
     tag = models.TextField()
     releasedate = models.TextField()
     url = models.TextField()
 
+    def __unicode__(self):
+        return self.nomAlbum
 
 class Track(models.Model):
     nomTrack = models.TextField()
@@ -24,3 +29,6 @@ class Track(models.Model):
     playcount = models.IntegerField()
     published = models.TextField()
     summary = models.TextField()
+
+    def __unicode__(self):
+        return self.nomTrack
