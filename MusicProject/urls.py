@@ -6,7 +6,7 @@ admin.autodiscover()
 #from django.contrib import admin
 #admin.autodiscover()
 
-from MusicProject.views import *
+from MusicProject.MusicApp.views import *
 
 urlpatterns = patterns('',
     # Examples:
