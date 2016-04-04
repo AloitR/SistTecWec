@@ -29,6 +29,7 @@ class Track(models.Model):
     playcount = models.IntegerField()
     published = models.TextField()
     summary = models.TextField()
+    user  = models.ForeignKey(User, related_name="tracks")
 
     def __unicode__(self):
         return self.nomTrack

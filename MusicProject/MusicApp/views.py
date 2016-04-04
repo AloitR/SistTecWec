@@ -23,6 +23,7 @@ def userpage(request, username):
         raise Http404("No s'ha trobat l'usuari.")
 
     tracks = user.track_set.all()
+
     template = get_template('userpage.html')
     variables = Context({
         'username': username,
