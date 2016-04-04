@@ -10,6 +10,7 @@ from MusicProject.MusicApp.views import *
 
 urlpatterns = patterns('',
     # Examples:
+     url(r'^user/(\w+)/$', userpage),
      url(r'^$', mainpage, name='home'),
     # url(r'^MusicProject/', include('MusicProject.foo.urls')),
 
