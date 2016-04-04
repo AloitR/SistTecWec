@@ -1,0 +1,19 @@
+<html>
+  <head>
+  <title>{{ username }} Music</title>
+  </head>
+<body>
+  <h1>Musica de {{ username }}</h1>
+  {% if MusicProject.MusicApp %}
+  <ul>
+  {% for Track in MusicProjects.MusicApp %}
+  <li>
+  {{MusicProject.MusicApp.track.nomtrack}} - {{ MusicProject.MusicApp.track.url}} - {{MusicProject.MusicApp.track.duration}} - {{MusicProject.MusicApp.track.playcount}} - {{MusicProject.MusicApp.track.published}} - {{MusicProject.MusicApp.track.summary}}
+  </li>
+  {% endfor %}
+  </ul>
+  {% else %}
+  <p>No te musica.</p>
+  {% endif %}
+</body>
+</html>
