@@ -1,9 +1,10 @@
 # Create your views here.
 from django.http import HttpResponse, Http404
-
+from django.shortcuts import render, render_to_response
 from django.template import Context
 from django.template.loader import get_template
-
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 from django.contrib.auth.models import User
 
 ''''''
@@ -11,14 +12,14 @@ from MusicProject.MusicApp.models import Track, Album, Artist
 ''''''
 
 def mainpage(request):
-    template = get_template('mainpage.html')
-    variables = Context({
-        'titlehead': 'MusicApp',
-        'pagetitle': 'Welcome to MusicApp',
-        'contentbody': 'Managing music since today'
+   return render_to_response(
+        'mainpage.html',
+        {
+                'titlehead': 'MusicApp',
+                'pagetitle': 'Welcome to MusicApp application',
+                'contentbody': 'Managing music since today',
+                'user': request.user
         })
-    output = template.render(variables)
-    return HttpResponse(output)
 
 def userpage(request, username):
     try:
@@ -31,7 +32,8 @@ def userpage(request, username):
         'username': username,
         'tracks': Track.objects.filter(),
         'albums': Album.objects.filter(),
-        'artists': Artist.objects.filter()
+        'artists': Artist.objects.filter(),
+        #'logout' : logout_view()
         })
     output = template.render(variables)
     return HttpResponse(output)

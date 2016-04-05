@@ -13,6 +13,7 @@ urlpatterns = patterns('',
      url(r'^user/(\w+)/$', userpage),
      url(r'^$', mainpage, name='home'),
      url(r'^login/$', 'django.contrib.auth.views.login'),
+     url(r'^logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^MusicProject/', include('MusicProject.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

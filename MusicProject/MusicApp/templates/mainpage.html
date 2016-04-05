@@ -5,7 +5,13 @@
 <body>
   <h1>{{ pagetitle }}</h1>
 
-  <p>{{ contentbody }}</p>
+{% if user.username %}
+<p>Welcome {{ user.username }}!</p>
+<meta http-equiv="Refresh" content="3; url=http://127.0.0.1:8000/user/{{user.username}}"> 
+{% else %}
+<p>Welcome anonymous:
+Must  <a href="/login/">sign in</a> to continue.</p>
+{% endif %}
 
 </body>
 </html>
