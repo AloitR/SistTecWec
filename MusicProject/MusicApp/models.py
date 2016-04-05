@@ -9,7 +9,7 @@ class Artist(models.Model):
     url = models.URLField()
     similars = models.TextField()
     summary = models.TextField()
-    #user = models.ForeignKey(User)
+    name = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.nomArtista
