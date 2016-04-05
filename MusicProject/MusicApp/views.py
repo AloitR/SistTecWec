@@ -39,7 +39,6 @@ def userpage(request, username):
     output = template.render(variables)
     return HttpResponse(output)
 
-
 def artistjson(request):
     result = Artist.objects.all()
     data = serializers.serialize('json', result)
