@@ -1,9 +1,18 @@
 <html>
   <head>
-  <title>{{ username }} Music</title>
+  <title>{{ username }}' Music</title>
   </head>
 <body>
   <h1>Musica de {{ username }}</h1>
+
+  <p>Artists:</p>
+  > {{artists}}
+  <p>Albums:</p>
+  > {{albums}}
+  <p>Tracks:</p>
+  > {{tracks}}
+
+  <!--
   {% if MusicProject.MusicApp %}
   <ul>
   {% for Track in MusicProjects.MusicApp %}
@@ -15,5 +24,7 @@
   {% else %}
   <p>No te musica.</p>
   {% endif %}
+
+  -->
 </body>
 </html>

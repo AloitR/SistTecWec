@@ -6,6 +6,10 @@ from django.template.loader import get_template
 
 from django.contrib.auth.models import User
 
+''''''
+from MusicProject.MusicApp.models import Track, Album, Artist
+''''''
+
 def mainpage(request):
     template = get_template('mainpage.html')
     variables = Context({
@@ -22,12 +26,12 @@ def userpage(request, username):
     except:
         raise Http404("No s'ha trobat l'usuari.")
 
-    tracks = user.tracks.all()
-
     template = get_template('userpage.html')
     variables = Context({
         'username': username,
-        'tracks': tracks
+        'tracks': Track.objects.filter(),
+        'albums': Album.objects.filter(),
+        'artists': Artist.objects.filter()
         })
     output = template.render(variables)
     return HttpResponse(output)
