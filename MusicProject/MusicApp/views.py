@@ -1,14 +1,15 @@
 # Create your views here.
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib.auth import logout
-from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from django.utils import simplejson
+from django.core import serializers
 
 ''''''
-from MusicProject.MusicApp.models import Track, Album, Artist
+from MusicProject.MusicApp.models import *
 ''''''
 
 def mainpage(request):
@@ -37,3 +38,19 @@ def userpage(request, username):
         })
     output = template.render(variables)
     return HttpResponse(output)
+
+
+def artistjson(request):
+    result = Artist.objects.all()
+    data = serializers.serialize('json', result)
+    return HttpResponse(data, mimetype='application/json')
+
+def albumjson(request):
+    misdatos = Album.objects.all()
+    data = serializers.serialize('json', misdatos)
+    return HttpResponse(data, mimetype='application/json')
+
+def trackjson(request):
+    result = Track.objects.all()
+    data = serializers.serialize('json', result)
+    return HttpResponse(data, mimetype='application/json')
