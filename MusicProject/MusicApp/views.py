@@ -31,14 +31,17 @@ def userpage(request, username):
     if (request.user.is_authenticated() and user==request.user):
 
         current_user = request.user
-        print current_user.id
+
+        tracks = user.track_set.all().filter(user = current_user.id)
+        albums = user.album_set.all().filter(user = current_user.id)
+        artists = user.artist_set.all().filter(user = current_user.id)
 
         template = get_template('userpage.html')
         variables = Context({
             'username': username,
-            'tracks': Track.objects.filter(user = current_user.id),
-            'albums': Album.objects.filter(user = current_user.id),
-            'artists': Artist.objects.filter(user = current_user.id),
+            'tracks': tracks,
+            'albums': albums,
+            'artists': artists,
             #'logout' : logout_view()
             })
         output = template.render(variables)
@@ -47,16 +50,16 @@ def userpage(request, username):
         return HttpResponse('Acces denegat.')
 
 def artistjson(request):
-    result = Artist.objects.all()
-    data = serializers.serialize('json', result)
-    return HttpResponse(data, mimetype='application/json')
-
-def albumjson(request):
-    misdatos = Album.objects.all()
-    data = serializers.serialize('json', misdatos)
-    return HttpResponse(data, mimetype='application/json')
+     result = Artist.objects.all()
+     data = serializers.serialize('json', result)
+     return HttpResponse(data, mimetype='application/json')
 
 def trackjson(request):
-    result = Track.objects.all()
-    data = serializers.serialize('json', result)
-    return HttpResponse(data, mimetype='application/json')
+     result = Track.objects.all()
+     data = serializers.serialize('json', result)
+     return HttpResponse(data, mimetype='application/json')
+
+def albumjson(request):
+     result = Album.objects.all()
+     data = serializers.serialize('json', result)
+     return HttpResponse(data, mimetype='application/json')
