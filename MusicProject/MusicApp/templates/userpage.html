@@ -5,29 +5,47 @@
 <body>
   <h1>Musica de {{ username }}</h1>
 
-  <p>Artists:</p>
-  > {{artists}}
-  <p>Albums:</p>
-  > {{albums}}
-  <p>Tracks:</p>
-  > {{tracks}}
-
-  <a href=/logout>Click here to logout</a>
-
-
-  <!--
-  {% if MusicProject.MusicApp %}
+<p><b>Artists:</b></p>
+  {% if artists %}
   <ul>
-  {% for Track in MusicProjects.MusicApp %}
-  <li>
-  {{MusicProject.MusicApp.track.nomtrack}} - {{ MusicProject.MusicApp.track.url}} - {{MusicProject.MusicApp.track.duration}} - {{MusicProject.MusicApp.track.playcount}} - {{MusicProject.MusicApp.track.published}} - {{MusicProject.MusicApp.track.summary}}
-  </li>
-  {% endfor %}
+    {% for artist in artists %}
+    <li>
+    Name: {{artist.nomArtista}}<br> - Tag: {{artist.tags}} <br> - Url: {{artist.url}} <br> - Similars: {{artist.similats}} <br> - Summary: {{artist.summary}}</p>
+    </li>
+    {% endfor %}
   </ul>
   {% else %}
-  <p>No te musica.</p>
+    <p>Cap artista en llista.</p>
   {% endif %}
 
-  -->
+
+<p><b>Albums:</b></p>
+  {% if albums %}
+  <ul>
+    {% for album in albums %}
+    <li>
+    Name: {{album.nomAlbum}}<br> - Tag: {{album.tags}} <br> - Release date: {{album.releasedate}} <br> - Artist: {{album.artist.nomArtista}} <br></p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Cap album en llista.</p>
+  {% endif %}
+
+
+<p><b>Tracks</b></p>
+  {% if tracks %}
+  <ul>
+    {% for track in tracks %}
+    <li>
+    Name: {{track.nomTrack}}<br> - Url: {{track.url}} <br> - Duration: {{track.duration}} <br> - Playcount: {{track.playcount}} <br> - Release date: {{track.published}} <br> - Summary: {{track.summary}} <br> - Artist: {{track.artist.nomArtista}} <br> - Album: {{track.album.nomAlbum}} <br></p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Cap album en llista.</p>
+  {% endif %}
+
+<a href=/logout>Click here to logout.</a>
 </body>
 </html>
