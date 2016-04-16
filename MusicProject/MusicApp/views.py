@@ -28,16 +28,23 @@ def userpage(request, username):
     except:
         raise Http404("No s'ha trobat l'usuari.")
 
-    template = get_template('userpage.html')
-    variables = Context({
-        'username': username,
-        'tracks': Track.objects.filter(),
-        'albums': Album.objects.filter(),
-        'artists': Artist.objects.filter(),
-        #'logout' : logout_view()
-        })
-    output = template.render(variables)
-    return HttpResponse(output)
+    if request.user.is_authenticated():
+
+        current_user = request.user
+        print current_user.id
+
+        template = get_template('userpage.html')
+        variables = Context({
+            'username': username,
+            'tracks': Track.objects.get(),
+            'albums': Album.objects.filter(),
+            'artists': Artist.objects.filter(),
+            #'logout' : logout_view()
+            })
+        output = template.render(variables)
+        return HttpResponse(output)
+    else:
+        return render_to_response('mainpage.html')
 
 def artistjson(request):
     result = Artist.objects.all()

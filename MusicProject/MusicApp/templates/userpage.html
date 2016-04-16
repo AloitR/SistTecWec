@@ -6,6 +6,20 @@
   <h1>Musica de {{ username }}</h1>
 
   <p><b>Artists:</b></p>
+    {% if artists %}
+    <ul>
+      {% for artists in MusicApp %}
+      <li>
+      {{MusicApp.Artist.nomArtista}} - {{ MusicApp.Artist.tags}} - {{MusicApp.Artist.similars }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>Cap artista en llista.</p>
+    {% endif %}
+
+
+  <p><b>Artists:</b></p>
   > {{artists}}
   <p><b>Albums:</b></p>
   > {{albums}}
@@ -15,18 +29,18 @@
       <a href=/logout>Logout</a>
     </p>
 
-
-  <!--
-  {% if MusicProject.MusicApp %}
+<!---
+<p><b>Artists:</b></p>
+  {% if artists %}
   <ul>
-  {% for Track in MusicProjects.MusicApp %}
-  <li>
-  {{MusicProject.MusicApp.track.nomtrack}} - {{ MusicProject.MusicApp.track.url}} - {{MusicProject.MusicApp.track.duration}} - {{MusicProject.MusicApp.track.playcount}} - {{MusicProject.MusicApp.track.published}} - {{MusicProject.MusicApp.track.summary}}
-  </li>
-  {% endfor %}
+    {% for artists in MusicApp %}
+    <li>
+    {{MusicApp.Artist.nomArtista}} - {{ MusicApp.Artist.tags}} - {{MusicApp.Artist.similars }}
+    </li>
+    {% endfor %}
   </ul>
   {% else %}
-  <p>No te musica.</p>
+    <p>Cap artista en llista.</p>
   {% endif %}
 
   -->
