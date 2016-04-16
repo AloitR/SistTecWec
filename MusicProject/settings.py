@@ -1,5 +1,12 @@
 # Django settings for MusicProject project.
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -123,7 +130,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'MusicApp'
+    'MusicApp',
+    'rest_framework'
 )
 
 # A sample logging configuration. The only tangible logging

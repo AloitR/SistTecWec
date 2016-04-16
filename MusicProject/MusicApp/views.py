@@ -7,6 +7,10 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.utils import simplejson
 from django.core import serializers
+<<<<<<< HEAD
+=======
+from django.template.loader import render_to_string
+>>>>>>> Intentant obtenir una representació en JSON
 
 ''''''
 from MusicProject.MusicApp.models import *
@@ -28,6 +32,7 @@ def userpage(request, username):
     except:
         raise Http404("No s'ha trobat l'usuari.")
 
+<<<<<<< HEAD
     if (request.user.is_authenticated() and user==request.user):
 
         current_user = request.user
@@ -63,3 +68,28 @@ def albumjson(request):
      result = Album.objects.all()
      data = serializers.serialize('json', result)
      return HttpResponse(data, mimetype='application/json')
+=======
+    template = get_template('userpage.html')
+    variables = Context({
+        'username': username,
+        'tracks': Track.objects.filter(),
+        'albums': Album.objects.filter(),
+        'artists': Artist.objects.filter(),
+        #'logout' : logout_view()
+        })
+    output = template.render(variables)
+    return HttpResponse(output)
+
+def artistjson(request):
+    user = request.user
+    if not user:
+        raise Http404('User not found.')
+    artist = user.artist_set.all()
+    tojson = []
+    for s in artist:
+        artist = dict()
+        artist["date"]= 'hola'
+        artistsjson.append(artist)
+
+    return HttpResponse(simplejson.dumps(artistjson),mimetype='application/json')
+>>>>>>> Intentant obtenir una representació en JSON

@@ -9,7 +9,11 @@ class Artist(models.Model):
     url = models.URLField()
     similars = models.TextField()
     summary = models.TextField()
+<<<<<<< HEAD
     user = models.ForeignKey(User)
+=======
+    name = models.ForeignKey(User)
+>>>>>>> Intentant obtenir una representació en JSON
 
     def __unicode__(self):
         return self.nomArtista
