@@ -9,7 +9,6 @@ class Artist(models.Model):
     url = models.URLField()
     similars = models.TextField()
     summary = models.TextField()
-    #user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.nomArtista
@@ -19,7 +18,7 @@ class Album(models.Model):
     tag = models.TextField()
     releasedate = models.TextField()
     url = models.URLField()
-    #user = models.ForeignKey(User)
+    artista = models.ForeignKey(Artist, null=True, blank=True   )
 
     def __unicode__(self):
         return self.nomAlbum
@@ -31,7 +30,8 @@ class Track(models.Model):
     playcount = models.IntegerField()
     published = models.TextField()
     summary = models.TextField()
-    #user = models.ForeignKey(User)
+    artista = models.ForeignKey(Artist, null=True, blank=True)
+    album = models.ForeignKey(Album, null=True, blank=True)
 
     def __unicode__(self):
         return self.nomTrack
