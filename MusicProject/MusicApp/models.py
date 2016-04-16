@@ -10,11 +10,17 @@ class Artist(models.Model):
     similars = models.TextField()
     summary = models.TextField()
 <<<<<<< HEAD
+<<<<<<< HEAD
     user = models.ForeignKey(User)
 =======
     name = models.ForeignKey(User)
 >>>>>>> Intentant obtenir una representació en JSON
 
+=======
+    name = models.ForeignKey(User)
+    user = models.ForeignKey(User)
+    
+>>>>>>> master
     def __unicode__(self):
         return self.nomArtista
 
