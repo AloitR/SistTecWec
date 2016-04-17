@@ -9,24 +9,8 @@ class Artist(models.Model):
     url = models.URLField()
     similars = models.TextField()
     summary = models.TextField()
-<<<<<<< HEAD
-    name = models.ForeignKey(User)
     user = models.ForeignKey(User)
-    
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-    user = models.ForeignKey(User)
-=======
-    name = models.ForeignKey(User)
->>>>>>> Intentant obtenir una representació en JSON
 
-=======
-    name = models.ForeignKey(User)
-    user = models.ForeignKey(User)
-    
->>>>>>> master
->>>>>>> GitConflicts
     def __unicode__(self):
         return self.nomArtista
 
