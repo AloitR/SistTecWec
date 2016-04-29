@@ -12,6 +12,17 @@ from django.template.loader import render_to_string
 ''''''
 from MusicProject.MusicApp.models import *
 ''''''
+def editorpage(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except:
+        raise Http404("No s'ha trobat l'usuari.")
+
+    if (request.user.is_authenticated() and user==request.user):
+
+        return HttpResponse('Pagina editor')
+    else:
+        return HttpResponse('Acces denegat.')
 
 def mainpage(request):
    return render_to_response(
