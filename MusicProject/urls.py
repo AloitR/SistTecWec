@@ -1,10 +1,13 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.views.generic import DetailView, ListView, UpdateView, CreateView
 
-# Uncomment the next two lines to enable the admin:
+#from django.utils import timezone
+
 from django.contrib import admin
 admin.autodiscover()
-#from django.contrib import admin
-#admin.autodiscover()
+
+#from myrestaurants.models import Restaurant, RestaurantForm, Dish, DishForm
+from MusicApp.models import Artist, Album, Track
 
 from MusicProject.MusicApp.views import *
 
@@ -20,4 +23,11 @@ urlpatterns = patterns('',
      url(r'^api/track.json/$', trackjson),
     # Uncomment the next line to enable the admin:
      url(r'^admin/', include(admin.site.urls)),
+
+
+     url(r'^artist/(?P<pk>\d+)/$',
+        DetailView.as_view(
+            model = Artist,
+            template_name = 'MusicApp/templates/MusicApp/artist_detail.html'),
+        name='artist_detail'),
 )

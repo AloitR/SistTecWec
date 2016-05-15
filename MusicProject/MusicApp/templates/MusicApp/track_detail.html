@@ -1,0 +1,16 @@
+{% extends "basepage.html" %}
+
+{% block content %}
+
+<h1>{{ track.nomTrack }}</h1>
+
+ <p> <h3> url:</h3> <a href="{{track.url }}"> {{artist.url }} </a> </p>
+ <p> <h3> Duration: </h3> {{track.duration }}</p>
+ <p> <h3> Playcount: </h3> {{track.playcount }}</p>
+ <p> <h3> Published: </h3> {{track.published }}</p>
+ <p> <h3> Sumari:</h3> {{track.summary }}</p>
+ <p> <h3> Artista </h3> {{track.artista.nomArtista }}</p>
+ <p> <h3> Album: </h3> {{track.album.nomAlbum }}</p>
+
+Creat per: {{ track.user }}
+{% endblock %}

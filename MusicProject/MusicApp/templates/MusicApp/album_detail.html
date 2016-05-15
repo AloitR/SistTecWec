@@ -1,0 +1,14 @@
+{% extends "basepage.html" %}
+
+{% block content %}
+
+<h1>{{ album.nomAlbum }}</h1>
+
+ <p> <h3>tags:</h3> {{album.tags }}</p>
+ <p> <h3>url:</h3> <a href="{{album.url }}"> {{artist.url }} </a> </p>
+ <p> <h3>Releasedate:</h3> {{album.releasedate }}</p>
+ <p> <h3>Artista:</h3> {{album.artista.nomArtista}}</p>
+ <p> <h3>Sumari:</h3> {{artist.summary }}</p>
+
+Creat per: {{ artist.user }}
+{% endblock %}

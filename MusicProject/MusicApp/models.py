@@ -14,6 +14,8 @@ class Artist(models.Model):
 
     def __unicode__(self):
         return self.nomArtista
+    def get_absolute_url(self):
+        return reverse('MusicApp:Artist_details', kwargs={'pk': self.pk})
 
 class Album(models.Model):
     nomAlbum = models.TextField()
@@ -25,6 +27,8 @@ class Album(models.Model):
 
     def __unicode__(self):
         return self.nomAlbum
+    def get_absolute_url(self):
+        return reverse('MusicApp:Album_details', kwargs={'pkr': self.artist.pk, 'pk': self.pk})
 
 class Track(models.Model):
     nomTrack = models.TextField()
@@ -39,3 +43,5 @@ class Track(models.Model):
 
     def __unicode__(self):
         return self.nomTrack
+    def get_absolute_url(self):
+        return reverse('MusicApp:Track_details', kwargs={'pkr': self.artist.pk, 'pk': self.pk})
