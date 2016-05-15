@@ -1,0 +1,22 @@
+{% extends "basepage.html" %}
+
+{% block content %}
+
+<h1>
+    Albums
+    {% if user %}
+        (<a href="{% url 'myalbums:album_create' %}">add</a>)
+    {% endif %}
+</h1>
+
+{% if latest_albums_list %}
+    <ul>
+        {% for album in latest_albums_list %}
+            <li><a href="{% url 'albums:album_detail' album.id %}">{{ album.nomAlbun }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No albums are available.</p>
+{% endif %}
+
+{% endblock %}
