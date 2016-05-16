@@ -9,9 +9,14 @@ from django.utils import simplejson
 from django.core import serializers
 from django.template.loader import render_to_string
 
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView, UpdateView
+from MusicApp.models import Artist, Album, Track
+
 ''''''
 from MusicProject.MusicApp.models import *
 ''''''
+
 def editorpage(request, username):
     try:
         user = User.objects.get(username=username)
@@ -75,3 +80,59 @@ def albumjson(request):
      result = Album.objects.all()
      data = serializers.serialize('json', result)
      return HttpResponse(data, mimetype='application/json')
+
+''' --------------------- '''
+
+class ArtistDetail(DetailView):
+    model = Artist
+    template_name = "MusicApp/templates/MusicApp/artist_detail.html"
+
+    def get_object(self):
+        self.object = super(ArtistDetail, self).get_object()
+        return self.object
+
+    def get_context_data(self, **kwargs):
+        context = super(ArtistDetail, self).get_context_data(**kwargs)
+        context['artist'] = self.object.artist
+        return context
+
+class AlbumDetail(DetailView):
+    model = Album
+    template_name = "MusicApp/templates/MusicApp/album_detail.html"
+
+    def get_object(self):
+        self.object = super(AlbumDetail, self).get_object()
+        return self.object
+
+    def get_context_data(self, **kwargs):
+        context = super(AlbumDetail, self).get_context_data(**kwargs)
+        context['album'] = self.object.album
+        return context
+
+class TrackDetail(DetailView):
+    model = Track
+    template_name = "MusicApp/templates/MusicApp/track_detail.html"
+
+    def get_object(self):
+        self.object = super(TrackDetail, self).get_object()
+        return self.object
+
+    def get_context_data(self, **kwargs):
+        context = super(TrackDetail, self).get_context_data(**kwargs)
+        context['track'] = self.object.track
+        return context
+
+class ArtistCreate(CreateView):
+    model = Artist
+class ArtistUpdate(UpdateView):
+    model = Artist
+
+class AlbumCreate(CreateView):
+    model = Album
+class AlbumUpdate(UpdateView):
+    model = Album
+
+class TrackCreate(CreateView):
+    model = Track
+class TrackUpdate(UpdateView):
+    model = Track
