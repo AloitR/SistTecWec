@@ -10,6 +10,9 @@ admin.autodiscover()
 from MusicApp.models import Artist, Album, Track
 from MusicApp.forms import ArtistForm, AlbumForm, TrackForm
 from MusicProject.MusicApp.views import *
+
+from MusicApp.views import ArtistCreate, AlbumCreate, TrackCreate
+
 '''
 urlpatterns = patterns('',
     # Examples:
@@ -54,11 +57,7 @@ urlpatterns = patterns('',
 
     # ex: /artist/create/
     url(r'^artist/create/$',
-        CreateView.as_view(
-            model = Artist,
-            template_name = 'MusicApp/templates/MusicApp/artist_form.html',
-            form_class = ArtistForm),
-            #success_url='..'),
+        ArtistCreate.as_view(),
         name='restaurant_create'),
     # null value in column "user_id" violates not-null constraint
     # TODO
@@ -81,10 +80,7 @@ urlpatterns = patterns('',
 
     # ex: artist/1/album/create/
     url(r'^artist/(?P<pk>\d+)/album/create/$',
-        CreateView.as_view(
-            model = Album,
-            template_name = 'MusicApp/templates/MusicApp/album_form.html',
-            form_class = AlbumForm),
+        AlbumCreate.as_view(),
         name='album_create'),
     # null value in column "user_id" violates not-null constraint
     # TODO
@@ -107,10 +103,7 @@ urlpatterns = patterns('',
 
     # ex: artist/1/album/1/track/create/
     url(r'^artist/(?P<pkr>\d+)/album/(?P<pk>\d+)/track/create/$',
-        CreateView.as_view(
-            model = Track,
-            template_name = 'MusicApp/templates/MusicApp/track_form.html',
-            form_class = TrackForm),
+        TrackCreate.as_view(),
         name='track_create'),
     # null value in column "user_id" violates not-null constraint
     # TODO
