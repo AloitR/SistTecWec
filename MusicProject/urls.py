@@ -39,69 +39,69 @@ urlpatterns = patterns('',
             template_name='MusicApp/templates/MusicApp/MusicApp_list.html'),
         name='musicapp_list'),
 
-    # ex: /artist/1/
+    # ex: /artists/1/
     url(r'^artists/(?P<pk>\d+)/$',
         DetailView.as_view(
             model = Artist,
             template_name = 'MusicApp/templates/MusicApp/artist_detail.html'),
         name='artist_detail'),
 
-    # ex: /artist/1/edit/
+    # ex: /artists/1/edit/
     url(r'^artists/(?P<pk>\d+)/edit/$',
         UpdateView.as_view(
             model = Artist,
-            template_name = 'MusicApp/templates/MusicApp/artist_form.html',
+            template_name = 'MusicApp/templates/MusicApp/form.html',
             form_class = ArtistForm),
             #success_url='..'), Dona error pero en albums no. (?)
         name='artist_edit'),
 
-    # ex: /artist/create/
+    # ex: /artists/create/
     url(r'^artists/create/$',
         ArtistCreate.as_view(),
         name='restaurant_create'),
     # null value in column "user_id" violates not-null constraint
     # TODO
 
-    # ex: artist/1/album/1/
+    # ex: artists/1/albums/1/
     url(r'^artists/(?P<pkr>\d+)/albums/(?P<pk>\d+)/$',
         DetailView.as_view(
             model=Album,
-            template_name='MusicApp/templates/MusicApp/album_form.html'),
+            template_name='MusicApp/templates/MusicApp/form.html'),
         name='album_detail'),
 
-    # ex: artist/1/album/1/edit/
+    # ex: artists/1/albums/1/edit/
     url(r'^artists/(?P<pkr>\d+)/albums/(?P<pk>\d+)/edit/$',
         UpdateView.as_view(
             model = Album,
-            template_name = 'MusicApp/templates/MusicApp/album_form.html',
+            template_name = 'MusicApp/templates/MusicApp/form.html',
             form_class = AlbumForm,
             success_url='..'),
         name='album_edit'),
 
-    # ex: artist/1/album/create/
+    # ex: artists/1/albums/create/
     url(r'^artists/(?P<pk>\d+)/albums/create/$',
         AlbumCreate.as_view(),
         name='album_create'),
     # null value in column "user_id" violates not-null constraint
     # TODO
 
-    # ex: artist/1/album/1/track/1/
+    # ex: artists/1/albums/1/tracks/1/
     url(r'^artists/(?P<pkr>\d+)/albums/(?P<pk>\d+)/tracks/(?P<pkrt>\d+)/$',
         DetailView.as_view(
             model=Track,
-            template_name='MusicApp/templates/MusicApp/track_form.html'),
+            template_name='MusicApp/templates/MusicApp/form.html'),
         name='track_detail'),
 
-    # ex: artist/1/album/1/track/1/edit/
+    # ex: artists/1/albums/1/tracks/1/edit/
     url(r'^artists/(?P<pkr>\d+)/albums/(?P<pk>\d+)/tracks/(?P<pkrt>\d+)/edit/$',
         UpdateView.as_view(
             model = Track,
-            template_name = 'MusicApp/templates/MusicApp/track_form.html',
+            template_name = 'MusicApp/templates/MusicApp/form.html',
             form_class = TrackForm,
             success_url='..'),
         name='track_edit'),
 
-    # ex: artist/1/album/1/track/create/
+    # ex: artists/1/album/s1/tracks/create/
     url(r'^artists/(?P<pkr>\d+)/albums/(?P<pk>\d+)/tracks/create/$',
         TrackCreate.as_view(),
         name='track_create'),

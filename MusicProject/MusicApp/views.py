@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from MusicApp.models import Artist, Album, Track
+from MusicApp.forms import ArtistForm, AlbumForm, TrackForm
 
 ''''''
 from MusicProject.MusicApp.models import *
@@ -124,15 +125,36 @@ class TrackDetail(DetailView):
 
 class ArtistCreate(CreateView):
     model = Artist
+    from_class = ArtistForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(ArtistCreate, self).form_valid(form)
+
 class ArtistUpdate(UpdateView):
     model = Artist
 
 class AlbumCreate(CreateView):
     model = Album
+    from_class = AlbumForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.artist = Artist.objects.get(id=self.kwargs['pk'])
+        return super(AlbumCreate, self).form_valid(form)
+
 class AlbumUpdate(UpdateView):
     model = Album
 
 class TrackCreate(CreateView):
     model = Track
+    from_class = TrackForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        #form.instance.artist = Artist.objects.get(id=self.kwargs['pk']) #pk/pkr/pkrt?
+        form.instance.album = Album.objects.get(id=self.kwargs['pk'])
+        return super(AlbumCreate, self).form_valid(form)
+
 class TrackUpdate(UpdateView):
     model = Track
