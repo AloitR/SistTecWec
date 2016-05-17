@@ -12,6 +12,8 @@ from MusicApp.forms import ArtistForm, AlbumForm, TrackForm
 from MusicProject.MusicApp.views import *
 
 from MusicApp.views import ArtistCreate, AlbumCreate, TrackCreate
+from django.conf import settings
+
 
 '''
 urlpatterns = patterns('',
@@ -108,3 +110,10 @@ urlpatterns = patterns('',
     # null value in column "user_id" violates not-null constraint
     # TODO
 )
+
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT, }),
+        )

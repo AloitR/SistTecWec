@@ -5,6 +5,9 @@
 <h1>{{ album.nomAlbum }}</h1>
 
  <p> <h3>tags:</h3> {{album.tags }}</p>
+ {% if album.image %}
+  <p><img src="{{ album.image.url }}"/></p>
+ {% endif %}
  <p> <h3>url:</h3> <a href="{{album.url }}"> {{artist.url }} </a> </p>
  <p> <h3>Releasedate:</h3> {{album.releasedate }}</p>
  <p> <h3>Artista:</h3> {{album.artista.nomArtista}}</p>

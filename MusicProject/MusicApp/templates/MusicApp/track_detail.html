@@ -3,7 +3,9 @@
 {% block content %}
 
 <h1>{{ track.nomTrack }}</h1>
-
+ {% if artist.image %}
+  <p><img src="{{ artist.image.url }}"/></p>
+ {% endif %}
  <p> <h3> url:</h3> <a href="{{track.url }}"> {{artist.url }} </a> </p>
  <p> <h3> Duration: </h3> {{track.duration }}</p>
  <p> <h3> Playcount: </h3> {{track.playcount }}</p>

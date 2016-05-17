@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class Artist(models.Model):
     nomArtista = models.TextField()
     tags = models.TextField()
+    image = models.ImageField(upload_to="MusicApp", blank=True, null=True)
     url = models.URLField()
     similars = models.TextField()
     summary = models.TextField()
@@ -21,6 +22,7 @@ class Album(models.Model):
     nomAlbum = models.TextField()
     tag = models.TextField()
     releasedate = models.TextField()
+    image = models.ImageField(upload_to="MusicApp", blank=True, null=True)
     url = models.URLField()
     artista = models.ForeignKey(Artist, null=True, blank=True   )
     user = models.ForeignKey(User)
@@ -32,6 +34,7 @@ class Album(models.Model):
 
 class Track(models.Model):
     nomTrack = models.TextField()
+    image = models.ImageField(upload_to="MusicApp", blank=True, null=True)
     url = models.URLField()
     duration = models.IntegerField()
     playcount = models.IntegerField()
