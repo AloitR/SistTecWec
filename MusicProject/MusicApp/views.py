@@ -14,6 +14,13 @@ from django.views.generic.edit import CreateView, UpdateView
 from MusicApp.models import Artist, Album, Track
 from MusicApp.forms import ArtistForm, AlbumForm, TrackForm
 
+from django.core import urlresolvers
+from rest_framework import generics                 #
+from rest_framework.decorators import api_view      #
+from rest_framework.response import Response        #
+from rest_framework.reverse import reverse          #
+from serializers import ArtistSerializer, AlbumSerializer, TrackSerializer
+
 ''''''
 from MusicProject.MusicApp.models import *
 ''''''
@@ -158,3 +165,35 @@ class TrackCreate(CreateView):
 
 class TrackUpdate(UpdateView):
     model = Track
+
+@api_view(('GET',))
+def api_root(request, format=None):
+    return Response({
+        'artists': reverse('MusicApp:artist-list', request=request, format=format),
+        'albums': reverse('MusicApp:album-list', request=request, format=format),
+        'tracks': reverse('MusicApp:track-list', request=request, format=format)
+    })
+
+class APIArtistList(generics.ListCreateAPIView):
+    model = Artist
+    serializer_class = ArtistSerializer
+
+class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = Artist
+    serializer_class = ArtistSerializer
+
+class APIAlbumList(generics.ListCreateAPIView):
+    model = Album
+    serializer_class = AlbumSerializer
+
+class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = Album
+    serializer_class = AlbumSerializer
+
+class APITrackList(generics.ListCreateAPIView):
+    model = Track
+    serializer_class = TrackSerializer
+
+class APIDTracketail(generics.RetrieveUpdateDestroyAPIView):
+    model = Track
+    serializer_class = TrackSerializer

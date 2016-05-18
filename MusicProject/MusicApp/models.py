@@ -8,7 +8,7 @@ class Artist(models.Model):
     nomArtista = models.TextField()
     tags = models.TextField()
     image = models.ImageField(upload_to="MusicApp", blank=True, null=True)
-    url = models.URLField()
+    web = models.URLField()
     similars = models.TextField()
     summary = models.TextField()
     user = models.ForeignKey(User, null=True)
@@ -23,8 +23,8 @@ class Album(models.Model):
     tag = models.TextField()
     releasedate = models.TextField()
     image = models.ImageField(upload_to="MusicApp", blank=True, null=True)
-    url = models.URLField()
-    artista = models.ForeignKey(Artist, null=True, blank=True   )
+    web = models.URLField()
+    artista = models.ForeignKey(Artist, null=True, blank=True,related_name='albums')
     user = models.ForeignKey(User)
 
     def __unicode__(self):
@@ -35,13 +35,13 @@ class Album(models.Model):
 class Track(models.Model):
     nomTrack = models.TextField()
     image = models.ImageField(upload_to="MusicApp", blank=True, null=True)
-    url = models.URLField()
+    web = models.URLField()
     duration = models.IntegerField()
     playcount = models.IntegerField()
     published = models.TextField()
     summary = models.TextField()
-    artista = models.ForeignKey(Artist, null=True, blank=True)
-    album = models.ForeignKey(Album, null=True, blank=True)
+    artista = models.ForeignKey(Artist, null=True, blank=True, related_name='tracks')
+    album = models.ForeignKey(Album, null=True, blank=True, related_name='albums')
     user = models.ForeignKey(User)
 
     def __unicode__(self):

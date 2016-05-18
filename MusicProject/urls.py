@@ -9,11 +9,16 @@ admin.autodiscover()
 #from myrestaurants.models import Restaurant, RestaurantForm, Dish, DishForm
 from MusicApp.models import Artist, Album, Track
 from MusicApp.forms import ArtistForm, AlbumForm, TrackForm
-from MusicProject.MusicApp.views import *
+#from MusicProject.MusicApp.views import *
 
 from MusicApp.views import ArtistCreate, AlbumCreate, TrackCreate
 from django.conf import settings
 
+from rest_framework.urlpatterns import format_suffix_patterns
+
+from MusicApp.views import ArtistCreate, AlbumCreate, TrackCreate, \
+    APIArtistDetail, APIAlbumDetail, APITrackDetail,  \
+    APIArtistList, APIAlbumList, APITrackList
 
 '''
 urlpatterns = patterns('',
@@ -111,6 +116,23 @@ urlpatterns = patterns('',
     # TODO
 )
 
+#RESTful API
+urlpatterns += patterns('',
+    url(r'^api/$', 'api_root'),
+
+    url(r'^api/artists/$', APIArtistList.as_view(), name='artist-list'),
+    url(r'^api/artists/(?P<pk>\d+)/$', APIArtistList.as_view(), name='artist-detail'),
+
+    url(r'^api/albums/$', APIAlbumList.as_view(), name='album-list'),
+    url(r'^api/albums/(?P<pk>\d+)/$', APIAlbumList.as_view(), name='album-detail'),
+
+    url(r'^api/tracks/$', APITrackList.as_view(), name='track-list'),
+    url(r'^api/tracks/(?P<pk>\d+)/$', APITrackList.as_view(), name='track-detail'),
+
+)
+
+# Format suffixes
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['api' ,'json',])
 
 if settings.DEBUG:
     urlpatterns += patterns('',
