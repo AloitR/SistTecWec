@@ -1,0 +1,16 @@
+
+{% block content %}
+
+<h1>MusicApps</h1>
+
+{% if latest_musicapp_list %}
+    <ul>
+        {% for musicapp in latest_musicapp_list %}
+            <li><a href="{% url 'MusicApp:artist_detail' artist.id %}">{{ artist.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No MusicApps are available.</p>
+{% endif %}
+
+{% endblock %}
