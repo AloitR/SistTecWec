@@ -112,7 +112,7 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
 
 class AlbumDetail(DetailView, ConnegResponseMixin):
     model = Album
-    template_name = 'musicapp/track_detail.html'
+    template_name = 'musicapp/album_detail.html'
 
 class TrackList(ListView, ConnegResponseMixin):
     model = Track

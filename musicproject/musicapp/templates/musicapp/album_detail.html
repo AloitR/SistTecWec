@@ -9,15 +9,15 @@
     {% endif %}
 </h1>
 
-<p>tags: {{ album.tag }}</p>
+<p><b>tags:</b> {{ album.tag }}</p>
 {% if album.image %}
     <p><img src="{{ album.image.url }}"/></p>
 {% endif %}
-<p>Releasedate: {{ album.releasedate }}</p>
-<p>Webpage: {{ album.web }}</p>
-<p>Artist:{{ album.artist }}</p>
+<p><b>Releasedate:</b> {{ album.releasedate }}</p>
+<p><b>Webpage:</b> {{ album.web }}</p>
+<p><b>Artist:</b>{{ album.artist }}</p>
 {% endblock %}
 
 {% block footer %}
-    Created by {{ album.user }} on {{ album.date }}
+    Created by {{ album.user }}
 {% endblock %}

@@ -3,20 +3,20 @@
 {% block content %}
 
 <h1>
-    {{ artist.name }}
+    {{ artist.nomArtista }}
     {% if user == artist.user %}
         (<a href="{% url 'musicapp:artist_edit' artist.library.id artist.id %}">edit</a>)
     {% endif %}
 </h1>
-<p>tags: {{ artist.tags }}</p>
+<p><b>tags:</b>  {{ artist.tags }}</p>
 {% if artist.image %}
     <p><img src="{{ artist.image.url }}"/></p>
 {% endif %}
-<p>Webpage: {{ artist.web }}</p>
-<p>Similar artists:{{ artist.similars }}</p>
-<p>Summary: {{ artist.summary }}</p>
+<p><b>Webpage:</b>  {{ artist.web }}</p>
+<p><b>Similar artists:</b> {{ artist.similars }}</p>
+<p><b>Summary:</b>  {{ artist.summary }}</p>
 {% endblock %}
 
 {% block footer %}
-    Created by {{ artist.user }} on {{ artist.date }}
+    Created by {{ artist.user }}
 {% endblock %}

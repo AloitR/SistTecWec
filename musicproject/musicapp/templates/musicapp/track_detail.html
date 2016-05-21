@@ -11,15 +11,15 @@
 {% if track.image %}
     <p><img src="{{ track.image.url }}"/></p>
 {% endif %}
-<p>Webpage: {{ track.web }}</p>
-<p>Duration: {{ track.duration }}s</p>
-<p>Playcount: {{ track.playcount }}</p>
-<p>Published: {{ track.published }}</p>
-<p>Summary: {{ track.summary }}</p>
-<p>Artist: {{ track.artist }}</p>
-<p>Album: {{ track.album }}</p>
+<p><b>Webpage:</b>  {{ track.web }}</p>
+<p><b>Duration:</b>  {{ track.duration }}s</p>
+<p><b>Playcount:</b>  {{ track.playcount }}</p>
+<p><b>Published:</b>  {{ track.published }}</p>
+<p><b>Summary:</b>  {{ track.summary }}</p>
+<p><b>Artist:</b>  {{ track.artist }}</p>
+<p><b>Album:</b>  {{ track.album }}</p>
 {% endblock %}
 
 {% block footer %}
-    Created by {{ track.user }} on {{ track.date }}
+    Created by {{ track.user }} 
 {% endblock %}
