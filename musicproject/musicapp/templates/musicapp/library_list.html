@@ -1,0 +1,14 @@
+{% extends "musicapp/base.html" %}
+{% block content %}
+<h1>
+    Music libraries
+    {% if user.is_authenticated %}(<a href="{% url 'musicapp:library_create' %}">add</a>){% endif %}
+</h1>
+<ul>
+    {% for library in latest_library_list %}
+        <li><a href="{% url 'musicapp:library_detail' library.id %}">
+            {{ library.name }}</a></li>
+    {% empty %}<li>Sorry, no music libraries registered yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

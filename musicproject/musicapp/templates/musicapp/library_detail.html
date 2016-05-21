@@ -1,0 +1,55 @@
+{% extends "musicapp/base.html" %}
+{% block content %}
+<h1>
+    {{ library.name }}
+    {% if user == library.user %}
+        (<a href="{% url 'musicapp:library_edit' library.id %}">edit</a>)
+    {% endif %}
+</h1>
+
+<h2>
+    Artists
+    {% if user.is_authenticated %}
+        (<a href="{% url 'musicapp:artist_create' library.id %}">add</a>)
+    {% endif %}
+</h2>
+<ul>
+    {% for artist in library.artists.all %}
+        <li><a href="{% url 'musicapp:artist_detail' library.id artist.id  g%}">
+            {{ artist.nomArtista }}</a></li>
+    {% empty %}<li>Sorry, no artists for this library.</li>
+    {% endfor %}
+</ul>
+
+<h2>
+    Albums
+    {% if user.is_authenticated %}
+        (<a href="{% url 'musicapp:album_create' library.id %}">add</a>)
+    {% endif %}
+</h2>
+<ul>
+    {% for album in library.albums.all %}
+        <li><a href="{% url 'musicapp:album_detail' library.id album.id  g%}">
+            {{ album.nomAlbum }}</a></li>
+    {% empty %}<li>Sorry, no albums for this library.</li>
+    {% endfor %}
+</ul>
+
+<h2>
+    Tracks
+    {% if user.is_authenticated %}
+        (<a href="{% url 'musicapp:track_create' library.id %}">add</a>)
+    {% endif %}
+</h2>
+<ul>
+    {% for track in library.tracks.all %}
+        <li><a href="{% url 'musicapp:track_detail' library.id track.id  g%}">
+            {{ track.nomTrack }}</a></li>
+    {% empty %}<li>Sorry, no tracks for this library.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+{% block footer %}
+    Created by {{ library.user }} on {{ library.date }}
+{% endblock %}

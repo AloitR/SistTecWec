@@ -1,0 +1,23 @@
+{% extends "musicapp/base.html" %}
+
+{% block content %}
+
+<h1>
+    {{ album.nomAlbum }}
+    {% if user == album.user %}
+        (<a href="{% url 'musicapp:album_edit' album.library.id album.id %}">edit</a>)
+    {% endif %}
+</h1>
+
+<p>tags: {{ album.tag }}</p>
+{% if album.image %}
+    <p><img src="{{ album.image.url }}"/></p>
+{% endif %}
+<p>Releasedate: {{ album.releasedate }}</p>
+<p>Webpage: {{ album.web }}</p>
+<p>Artist:{{ album.artist }}</p>
+{% endblock %}
+
+{% block footer %}
+    Created by {{ album.user }} on {{ album.date }}
+{% endblock %}

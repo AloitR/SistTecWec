@@ -22,6 +22,10 @@ from MusicApp2.views import ArtistCreate, AlbumCreate, TrackCreate, \
     APIArtistList, APIAlbumList, APITrackList, \
     ArtistUpdate, AlbumUpdate, TrackUpdate
 
+from django.views.generic.base import RedirectView
+
+import MusicApp2.views
+
 '''
 urlpatterns = patterns('',
     # Examples:
@@ -43,14 +47,10 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     url(r'^admin/', admin.site.urls),
+    url(r'^musicapp/', MusicApp2.views.mainpage, name='home'),
 
     # ex: /
-    url(r'^$',
-        ListView.as_view(
-            model=Artist,
-            context_object_name='latest_musicapp_list',
-            template_name='MusicApp2/templates/MusicApp/MusicApp_list.html'),
-        name='musicapp_list'),
+     (r'^$', RedirectView.as_view(url='/musicapp/')),
 
     # ex: /artists/1/
     url(r'^artists/(?P<pk>\d+)/$',
