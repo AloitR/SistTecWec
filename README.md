@@ -6,7 +6,7 @@ https://github.com/AloitR/SistTecWec
 
 ### Start the website
 ```
-cd MusicProject
+cd musicproject
 python manage.py runserver
 ```
 ### Data models:
