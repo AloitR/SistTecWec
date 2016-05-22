@@ -5,7 +5,7 @@
 <h1>
     {{ album.nomAlbum }}
     {% if user == album.user %}
-        (<a href="{% url 'musicapp:album_edit' album.library.id album.id %}">edit</a>)
+        (<a href="{% url 'musicapp:album_edit' album.Library.id album.id %}">edit</a>)
     {% endif %}
 </h1>
 

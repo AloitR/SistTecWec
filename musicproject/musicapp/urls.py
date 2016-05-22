@@ -56,6 +56,12 @@ urlpatterns = [
         ArtistDetail.as_view(),
         name='artist_detail'),
 
+    url(r'^librarys/(?P<pkr>\d+)/artists/(?P<pk>\d+)/edit/$',
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
+            model=Artist,
+            form_class=ArtistForm),
+        name='artist_edit'),
+
     url(r'^librarys/(?P<pk>\d+)/albums\.(?P<extension>(json|xml))$',
         AlbumList.as_view(),
         name='album_list'),
@@ -68,6 +74,12 @@ urlpatterns = [
         AlbumDetail.as_view(),
         name='album_detail'),
 
+    url(r'^librarys/(?P<pkr>\d+)/albums/(?P<pk>\d+)/edit/$',
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
+            model=Album,
+            form_class=AlbumForm),
+        name='album_edit'),
+
     url(r'^librarys/(?P<pk>\d+)/tracks\.(?P<extension>(json|xml))$',
         TrackList.as_view(),
         name='track_list'),
@@ -79,6 +91,12 @@ urlpatterns = [
     url(r'^librarys/(?P<pkr>\d+)/tracks/(?P<pk>\d+)(\.(?P<extension>(json|xml)))?$',
         TrackDetail.as_view(),
         name='track_detail'),
+
+    url(r'^librarys/(?P<pkr>\d+)/tracks/(?P<pk>\d+)/edit/$',
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
+            model=Track,
+            form_class=TrackForm),
+        name='track_edit'),
 
     # RESTful API
 

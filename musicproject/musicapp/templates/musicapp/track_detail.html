@@ -5,7 +5,7 @@
 <h1>
     {{ track.nomTrack }}
     {% if user == track.user %}
-        (<a href="{% url 'musicapp:track_edit' track.library.id track.id %}">edit</a>)
+        (<a href="{% url 'musicapp:track_edit' track.Library.id track.id %}">edit</a>)
     {% endif %}
 </h1>
 {% if track.image %}
@@ -21,5 +21,5 @@
 {% endblock %}
 
 {% block footer %}
-    Created by {{ track.user }} 
+    Created by {{ track.user }}
 {% endblock %}
