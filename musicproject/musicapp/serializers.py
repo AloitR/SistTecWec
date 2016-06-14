@@ -1,7 +1,7 @@
 from rest_framework.fields import CharField
 from rest_framework.relations import HyperlinkedRelatedField, HyperlinkedIdentityField
 from rest_framework.serializers import HyperlinkedModelSerializer
-from models import Library, Album, Artist, Track
+from models import Library, Album, Artist, Track, TrackReview
 
 
 class LibrarySerializer(HyperlinkedModelSerializer):
@@ -9,11 +9,12 @@ class LibrarySerializer(HyperlinkedModelSerializer):
     artists = HyperlinkedRelatedField(many=True, read_only=True, view_name='musicapp:library_detail')
     albums = HyperlinkedRelatedField(many=True, read_only=True, view_name='musicapp:album_detail')
     tracks = HyperlinkedRelatedField(many=True, read_only=True, view_name='musicapp:track_detail')
+    libraryreview_set = HyperlinkedRelatedField(many=True, read_only=True, view_name='musicapp:libraryreview-detail')
     user = CharField(read_only=True)
 
     class Meta:
         model = Library
-        fields = ('uri','artists', 'albums', 'tracks', 'user')
+        fields = ('uri','artists', 'albums', 'tracks', 'user', 'libraryreview_set')
 
 
 class ArtistSerializer(HyperlinkedModelSerializer):
@@ -47,3 +48,13 @@ class TrackSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Track
         fields = ('uri', 'nomTrack', 'image', 'web', 'duration', 'playcount', 'published', 'user', 'artist', 'album', 'library')
+
+
+class LibraryReviewSerializer(HyperlinkedModelSerializer):
+    uri = HyperlinkedIdentityField(view_name='musicapp:trackreview-detail')
+    restaurant = HyperlinkedRelatedField(view_name='musicapp:track-detail', read_only=True)
+    user = CharField(read_only=True)
+
+    class Meta:
+        model = LibraryReview
+        fields = ('uri', 'rating', 'comment', 'user', 'library')

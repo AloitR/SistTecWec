@@ -15,6 +15,10 @@ class Library(models.Model):
         return u"%s" % self.name
     def get_absolute_url(self):
         return reverse('musicapp:library_detail', kwargs={'pk': self.pk})
+    def averageRating(self):
+        ratingSum = sum([float(review.rating) for review in self.libraryreview_set.all()])
+        reviewCount = self.libraryreview_set.count()
+        return ratingSum / reviewCount
 
 class Artist(models.Model):
     nomArtista = models.TextField()
@@ -63,3 +67,17 @@ class Track(models.Model):
         return u"%s" % self.nomTrack
     def get_absolute_url(self):
         return reverse('musicapp:track_detail', kwargs={'pkr': self.Library.pk, 'pk': self.pk})
+
+
+
+class Review(models.Model):
+    RATING_CHOICES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
+    rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=RATING_CHOICES)
+    comment = models.TextField(blank=True, null=True)
+    user = models.ForeignKey(User, default=1)
+
+    class Meta:
+        abstract = True
+
+class LibraryReview(Review):
+    Library = models.ForeignKey(Library)

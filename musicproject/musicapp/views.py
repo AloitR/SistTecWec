@@ -13,7 +13,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from rest_framework import generics, permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from models import Library, Artist, Album, Track
+from models import Library, Artist, Album, Track, LibraryReview
 from forms import LibraryForm, ArtistForm, AlbumForm, TrackForm
 from serializers import LibrarySerializer, ArtistSerializer, AlbumSerializer, TrackSerializer
 
@@ -63,6 +63,11 @@ class LibraryList(ListView, ConnegResponseMixin):
 class LibraryDetail(DetailView, ConnegResponseMixin):
     model = Library
     template_name = 'musicapp/library_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(LibraryDetail, self).get_context_data(**kwargs)
+        context['RATING_CHOICES'] = LibraryReview.RATING_CHOICES
+        return context
 
 class LibraryCreate(LoginRequiredMixin, CreateView):
     model = Library
@@ -136,6 +141,15 @@ class TrackDetail(DetailView, ConnegResponseMixin):
 
 @login_required()
 ### RESTful API views ###
+def review(request, pk):
+    library = get_object_or_404(Library, pk=pk)
+    review = LibraryReview(
+        rating=request.POST['rating'],
+        comment=request.POST['comment'],
+        user=request.user,
+        library=library)
+    review.save()
+    return HttpResponseRedirect(reverse('musicapp:library_detail', args=(library.id,)))
 
 class IsOwnerOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
 
@@ -159,6 +173,16 @@ class APILibraryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Library.objects.all()
     serializer_class = LibrarySerializer
 
+class APILibraryReviewList(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    model = LibraryReview
+    queryset = LibraryReview.objects.all()
+    serializer_class = LibraryReviewSerializer
+
+class APILibraryReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsOwnerOrReadOnly,)
+    model = LibraryReview
+    serializer_class = LibraryReviewSerializer
 
 class APIArtistList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)

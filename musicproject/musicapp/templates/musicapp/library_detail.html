@@ -1,4 +1,4 @@
-{% extends "musicapp/base.html" %}
+{% extends "musicapp/base.html"  %}
 {% block content %}
 <h1>
     {{ library.name }}
@@ -48,6 +48,47 @@
     {% empty %}<li>Sorry, no tracks for this library.</li>
     {% endfor %}
 </ul>
+
+<h2>Reviews</h2>
+{% if library.libraryreview_set.all|length > 0 %}
+<span rel="aggregateRating">
+    <p typeof="AggregateRating">
+        Average rating <span property="ratingValue">{{ library.averageRating|stringformat:".1f" }}</span>
+        {% with library.libraryreview_set.all|length as reviewCount %}
+        from <span property="reviewCount">{{ reviewCount }}</span> review{{ reviewCount|pluralize }}
+        {% endwith %}
+    </p>
+</span>
+<ul rel="review">
+    {% for review in library.libraryreview_set.all %}
+        <li typeof="Review">
+            <p rel="reviewRating" typeof="Rating">
+                <span property="worstRating" content="{{ RATING_CHOICES.0.0 }}"></span>
+                <span property="ratingValue">{{ review.rating }}</span> star{{ review.rating|pluralize }}
+                {% with RATING_CHOICES|last as best %}
+                <span property="bestRating" content="{{ best.0 }}"></span>
+                {% endwith %}
+            </p>
+            <p property="description">{{ review.comment }}</p>
+            <p>Created by <span property="author">{{ review.user }}</span></p>
+        </li>
+    {% endfor %}
+</ul>
+</span>
+{% endif %}
+
+<h3>Add Review</h3>
+<form action="{% url 'musicapp:review_create' library.id %}" method="post">
+    {% csrf_token %}
+    Message: <textarea name="comment" id="comment" rows="4"></textarea>
+    <p>Rating:</p>
+    <p>{% for rate in RATING_CHOICES %}
+    <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.1 }}" />
+    <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label>
+    <br/>{% endfor %}
+    </p>
+    <input type="submit" value="Submit review" />
+</form>
 
 {% endblock %}
 {% block footer %}

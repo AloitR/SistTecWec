@@ -1,10 +1,3 @@
-'''
-    # Home page
-    url(r'^$',
-        RedirectView.as_view(url=reverse_lazy('musicapp:library_list')),
-        name='home_page'),
-
-'''
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
@@ -18,6 +11,7 @@ from views import LibraryCreate, LibraryDetail, LibraryList, \
     ArtistDetail, ArtistCreate, ArtistList,\
     AlbumDetail, AlbumCreate, AlbumList,\
     TrackDetail, TrackCreate, TrackList, \
+    review, APILibraryReviewDetail, APIReviewReviewList, \
     APILibraryDetail, APIArtistDetail, APIAlbumDetail, APITrackDetail,\
     APILibraryList, APIArtistList, APIAlbumList, APITrackList,\
     LoginRequiredCheckIsOwnerUpdateView
@@ -43,6 +37,10 @@ urlpatterns = [
             model=Library,
             form_class=LibraryForm),
         name='library_edit'),
+
+    url(r'^librarys/(?P<pk>\d+)/reviews/create/$',
+        review,
+        name='review_create'),
 
     url(r'^librarys/(?P<pk>\d+)/artists\.(?P<extension>(json|xml))$',
         ArtistList.as_view(),
@@ -107,6 +105,11 @@ urlpatterns = [
         APILibraryList.as_view(), name='library-list'),
     url(r'^api/librarys/(?P<pk>\d+)/$',
         APILibraryDetail.as_view(), name='library-detail'),
+    url(r'^api/trackreviews/$',
+        APITrackReviewList.as_view(), name='trackreview-list'),
+    url(r'^api/trackreviews/(?P<pk>\d+)/$',
+        APITrackReviewDetail.as_view(), name='trackreview-detail'),
+
 
     url(r'^api/artists/$',
         login_required(APIArtistList.as_view()), name='artist-list'),
