@@ -1,5 +1,10 @@
 {% extends "musicapp/base.html" %}
 {% block content %}
+
+
+<!--https://schema.org/MusicPlaylist-->
+<span vocab="http://schema.org/"  typeof="MusicPlaylist">
+  
 <h1>
     <span property="name">{{ library.name }}</span>
     {% if user == library.user %}
