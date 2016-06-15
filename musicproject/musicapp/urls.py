@@ -11,7 +11,7 @@ from views import LibraryCreate, LibraryDetail, LibraryList, \
     ArtistDetail, ArtistCreate, ArtistList,\
     AlbumDetail, AlbumCreate, AlbumList,\
     TrackDetail, TrackCreate, TrackList, \
-    review, APILibraryReviewDetail, APIReviewReviewList, \
+    review, APILibraryReviewDetail, APILibraryReviewList, \
     APILibraryDetail, APIArtistDetail, APIAlbumDetail, APITrackDetail,\
     APILibraryList, APIArtistList, APIAlbumList, APITrackList,\
     LoginRequiredCheckIsOwnerUpdateView
@@ -105,10 +105,10 @@ urlpatterns = [
         APILibraryList.as_view(), name='library-list'),
     url(r'^api/librarys/(?P<pk>\d+)/$',
         APILibraryDetail.as_view(), name='library-detail'),
-    url(r'^api/trackreviews/$',
-        APITrackReviewList.as_view(), name='trackreview-list'),
-    url(r'^api/trackreviews/(?P<pk>\d+)/$',
-        APITrackReviewDetail.as_view(), name='trackreview-detail'),
+    url(r'^api/libraryreviews/$',
+        APILibraryReviewList.as_view(), name='libraryreview-list'),
+    url(r'^api/libraryviews/(?P<pk>\d+)/$',
+        APILibraryReviewDetail.as_view(), name='libraryreview-detail'),
 
 
     url(r'^api/artists/$',

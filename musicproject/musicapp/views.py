@@ -15,7 +15,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from models import Library, Artist, Album, Track, LibraryReview
 from forms import LibraryForm, ArtistForm, AlbumForm, TrackForm
-from serializers import LibrarySerializer, ArtistSerializer, AlbumSerializer, TrackSerializer
+from serializers import LibrarySerializer, ArtistSerializer, AlbumSerializer, TrackSerializer,LibraryReviewSerializer
 
 class ConnegResponseMixin(TemplateResponseMixin):
 
@@ -196,7 +196,6 @@ class APIArtistDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
-
 class APIAlbumList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     model = Album
@@ -208,7 +207,6 @@ class APIAlbumDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Album
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
-
 
 class APITrackList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)

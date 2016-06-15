@@ -1,7 +1,7 @@
-{% extends "musicapp/base.html"  %}
+{% extends "musicapp/base.html" %}
 {% block content %}
 <h1>
-    {{ library.name }}
+    <span property="name">{{ library.name }}</span>
     {% if user == library.user %}
         (<a href="{% url 'musicapp:library_edit' library.id %}">edit</a>)
     {% endif %}

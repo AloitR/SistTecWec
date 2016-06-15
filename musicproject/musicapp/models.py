@@ -69,9 +69,8 @@ class Track(models.Model):
         return reverse('musicapp:track_detail', kwargs={'pkr': self.Library.pk, 'pk': self.pk})
 
 
-
 class Review(models.Model):
-    RATING_CHOICES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
+    RATING_CHOICES = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
     rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=RATING_CHOICES)
     comment = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, default=1)
@@ -80,4 +79,4 @@ class Review(models.Model):
         abstract = True
 
 class LibraryReview(Review):
-    Library = models.ForeignKey(Library)
+    library = models.ForeignKey(Library)
