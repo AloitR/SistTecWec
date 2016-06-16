@@ -2,17 +2,22 @@
 
 {% block content %}
 
+<!--https://schema.org/MusicGroup (Can also be a solo musician) -->
+<span vocab="http://schema.org/"  typeof="MusicGroup">
+
+
 <h1>
-    {{ artist.nomArtista }}
+      <span property="alternateName">{{ artist.nomArtista }}</span>
     {% if user == artist.user %}
         (<a href="{% url 'musicapp:artist_edit' artist.Library.id artist.id %}">edit</a>)
     {% endif %}
 </h1>
-<p><b>tags:</b>  {{ artist.tags }}</p>
+
+<p><b>tags:</b>  <span property="genre">{{ artist.tags }}</span></p>
 {% if artist.image %}
     <p><img src="{{ artist.image.url }}"/></p>
 {% endif %}
-<p><b>Webpage:</b>  {{ artist.web }}</p>
+<p><b>Webpage:</b>  <span property="url">{{ artist.web }}</span></p>
 <p><b>Similar artists:</b> {{ artist.similars }}</p>
 <p><b>Summary:</b>  {{ artist.summary }}</p>
 {% endblock %}
