@@ -25,6 +25,13 @@ Admin panel: http://127.0.0.1:8000/admin/
 API: http://127.0.0.1:8000/musicapp/api/[librarys/artists/albums/tracks]
 Media: http://127.0.0.1:8000/media/Music_App/[file]
 ```
+### Data models:
+```
+Aviable from any music library
+
+Ex: http://127.0.0.1:8000/musicapp/librarys/3
+    view-source:http://127.0.0.1:8000/musicapp/librarys/3
+``` 
 ### Default users:
 ```
 Role - Username - Password
