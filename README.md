@@ -1,6 +1,6 @@
 # SistTecWec
 
-Authors: Aloït Real & Yesid Quiroga
+Authors: Aloit R & Yesid Quiroga
 
 https://github.com/AloitR/SistTecWec
 
